@@ -1,6 +1,18 @@
-<div class="nav-links">
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/blog">Blog</a>
-  <a href="/tags/">Tags</a>
-</div>
+---
+import superheroes from "superheroes";
+
+const { date } = Astro.props;
+---
+
+<nav class="nav-links content-grid">
+  <div class="grid-one">
+    <a href="/blog">Blog</a>
+    <a href="/tags/">Tags</a>
+    <a href="/tags/">Gallery</a>
+  </div>
+  <div class="grid-two grid-item dim">{date}</div>
+  <div class="grid-three grid-item">RapidX</div>
+  <div class="grid-last">
+    Hello, <em>{superheroes.random()}</em><a href="/tags/">Home</a>
+  </div>
+</nav>

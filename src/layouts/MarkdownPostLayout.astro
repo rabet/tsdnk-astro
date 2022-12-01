@@ -1,23 +1,30 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
+const pubdate = new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.postImage} width="300" />
-  <div class="tags">
-    {
-      frontmatter.tags.map((tag: any) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
-    }
+<BaseLayout pageTitle={frontmatter.title} date={pubdate}>
+  <div class="content grid-item">
+    <p>{frontmatter.pubDate.slice(0, 10)}</p>
+    <p><em>{frontmatter.description}</em></p>
+    <p>Written by: {frontmatter.author}</p>
+    <img src={frontmatter.postImage} width="300" />
+    <div class="tags">
+      {
+        frontmatter.tags.map((tag: any) => (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
+    <slot />
   </div>
-  <slot />
 </BaseLayout>
 
 <style>
